@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ScoreCard</title>
+    <link href='https://fonts.googleapis.com/css?family=Milonga&subset=latin,latin-ext' rel='stylesheet' type='text/css'>    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="js/scoreCard.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="css/scoreCardStyles.css">
+</head>
+<body>
+<div id="background" class="mainBackground"></div>
+<div class="container">
+    <div class="row">
+        <div id="mainBanner">
+            <div id="slideButton" onclick="slideBtn()">
+                <div id="btnTxt"></div>
+            </div>
+            <div id="firstSlide">
+                <div id='courseInfo'> <!-- left -->
+                    <!-- <div id="doDiv">Select a Course</div> -->
+                    <div id="selectCourse" data-toggle="tooltip" title="SOMETHING!"></div>
+                    <span id="newCourse" onclick="newCourse()">Courses</span>
+                    <div id="slideWeather">
+                        <img src="../src/images/svg/01d.svg">
+                    </div>
+                    <div id="weatherContainer">
+                        <div id="cityName"></div>
+                        <div id="temp">
+                            <img src="">
+                        </div>
+                        <div id="humidity"></div>
+                        <div id="wind">
+                            <img src="">
+                        </div>
+                        <div id="icon">
+                            <span id="weatherDesc"></span>
+                            <img src="">
+                        </div>
+                    </div>
+                    <div id="courseStats">
+                        <img src="../src/images/svg/stats.svg">
+                    </div>
+                    <div id="courseContainer"></div>
+                    <div id="courseName"></div>
+                    <div class="contactInfo">
+                        <div id='theCity'></div>
+                        <div id="phoneNumber"></div>
+                        <div id="site"><a href="" id="websiteLink"></a></div>
+                    </div>
+                </div>
+            </div>
+            <div id="secondSlide">
+                <div id="map"></div> <!-- Right -->
+            </div>
+        </div>
+
+        <div id="scoreCardContainer">
+            <div id="scoreCard"></div>
+        </div>
+        <button id="addPlayerBtn" type="button" class="btn btn-info btn-md" data-toggle="modal" data-target="#myModal" onclick="addTeeBoxes()">Add Player</button>
+    </div>
+
+
+    <!-- My Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Player information:</h4>
+                </div>
+                <div class="modal-body">
+                    <label for="playerName">
+                        <input id="playerName" placeholder="Name...">
+                    </label>
+                    <label for="handicap">
+                        <input id="handicap" placeholder="handicap...">
+                    </label>
+                    <label for="teeDrop">Tee Box:
+                        <select name="level" id="teeDrop"></select>
+                    </label>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="addPlayer()">Add</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- My Modal end -->
+</div>
+<div class="footer">
+    <p class="main">Aesthetics score card<p>
+    <p class="secondary">By Blake Locke</p>
+</div>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYX6y-RZJ7AshNcPrjlUghJRZzbH8DqEM&callback=initMap"
+        async defer></script>
+</body>
+</html>

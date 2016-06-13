@@ -1,0 +1,434 @@
+* {
+    box-sizing: border-box;
+}
+.playerPar {
+    height: 25px;
+    width: 20px;
+    text-align: center;
+    padding: 3px;
+    float: left;
+}
+.holeScoreRow {
+    height: 25px;
+    width: 25px;
+    background-color: transparent;
+    overflow: hidden;
+    color: ghostWhite;
+    float: right;
+    border: 0;
+    border-left: solid 1px ghostWhite;
+    border-radius: 2px;
+    outline: 0;
+    padding-left: 5px;
+}
+.container {
+    width: 80%;
+}
+.holeCol {
+    display: flex;
+    justify-content: space-around;
+    flex-flow: column nowrap;
+    height: auto;
+    width: 60px;
+    background-color: transparent;
+    color: ghostWhite;
+}
+.holeColTitleRow {
+    height: 30px;
+    width: 60px;
+    line-height: 30px;
+    border: solid 2px white;
+    text-align: center;
+    border-radius: 10px;
+    color: ghostWhite;
+}
+.playerCol {
+    display: flex;
+    justify-content: space-around;
+    flex-flow: column nowrap;
+    height: auto;
+    width: auto;
+    background-color: transparent;
+    color: ghostWhite;
+    margin-right: 5px;
+}
+
+.playerCell {
+    text-align: center;
+    line-height: 30px;
+    border-bottom: solid 1px ghostWhite;
+}
+
+.parRowPro {
+    height: 30px;
+    width: 60px;
+    background-color: transparent;
+    border: 2px solid ghostWhite;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 10px;
+    color: ghostWhite;
+}
+.parRowPro:before{
+    content: 'Par ';
+}
+
+body {
+    background-color: rgba(0,0,0,0.80);
+}
+.scoreParContainer {
+    overflow: hidden;
+    height: 30px;
+    width: 60px;
+    border: solid 2px white;
+    text-align: center;
+    border-radius: 10px;
+    transition: all .2s ease-in;
+}
+.outCell {
+    height: 30px;
+    width: 60px;
+    float:left;
+    background-color: transparent;
+    text-align: center;
+    overflow: hidden;
+    line-height: 30px;
+    color: ghostWhite;
+    margin-bottom: 5px;
+    border-radius: 10px;
+}
+
+.contactInfo {
+    text-shadow: none;
+    font-family: Arial;
+    position:absolute;
+    bottom: 10px;
+    left: 10px;
+    font-size: 12px;
+    height: auto;
+    overflow: hidden;
+}
+#scoreCardContainer {
+    position: relative;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    overflow: auto;
+
+}
+#scoreCard {
+    position: relative;
+    width: auto;
+    max-height: 600px;
+    padding: 10px;
+    /* Flex Properties */
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+#outCol {
+    height: auto;
+    width: 60px;
+    content: 'Out';
+    line-height: 30px;
+    text-align: center;
+}
+
+#totalColumn {
+    background-color: rgba(0,0,0,0.60);
+    border-radius: 10px;
+}
+#map {
+    height: 100%;
+    width: 100%;
+    background-color: red;
+}
+
+.thisCourse {
+    height: auto;
+    width: auto;
+    color: ghostWhite;
+    background-color: rgba(0,0,0,0.60);
+    float: left;
+    font-size: 20px;
+    padding: 20px;
+    margin: 5px;
+    border: 2px solid rgba(255,255,255,0.60);
+    box-shadow: inset 0px 0px 5px 2px rgba(0,0,0,0.30);
+    z-index: 3;
+    cursor: pointer;
+}
+
+#banner {
+    position: relative;
+    margin-top: 20px;
+    background-color:red;
+    width:80%;
+    height: auto;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    overflow: hidden;
+    z-index: 2;
+}
+#courseInfo {
+    position: relative;
+    left: 0;
+    height: 100%;
+    min-height: 380px;
+    min-width: 100%;
+    width: auto;
+    color: ghostWhite;
+    background: transparent url('../images/foxHollowHeader.jpg') top no-repeat;
+    font-size: 60px;
+    text-align: center;
+    background-size: cover;
+    text-shadow: 0 0 2px #000;
+    font-family: "Milonga",cursive;
+    box-shadow: 1px 2px 30px black;
+    overflow: hidden;
+    z-index: 2;
+}
+
+#courseName {
+    position: relative;
+    top: 180px;
+}
+.mainBackground {
+    position:absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    background: white url('../images/foxHollowTop.jpg') no-repeat;
+    background-size: cover;
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    -o-filter: blur(5px);
+    -ms-filter: blur(5px);
+    filter: blur(5px);
+    z-index: -1;
+}
+
+#teeDrop {
+    width: 130px;
+    height: 30px;
+    box-sizing: border-box;
+}
+
+#addPlayerBtn {
+    position: relative;
+    display: none;
+    left: 73px;
+}
+
+
+#doDiv {
+    display: none;
+    padding: 5px;
+    height: auto;
+    width: auto;
+    color: ghostWhite;
+    font-size: 80px;
+    background-color: transparent;
+    text-align: center;
+    text-shadow: 0 0 10px black;
+    border-top: solid 5px white;
+}
+
+#selectCourse {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    height: auto;
+    width: auto;
+    padding: 15px;
+}
+
+/*-- Slide Stuff --*/
+#mainBanner{
+    width: 90%;
+    min-height: 500px;
+    height: auto;
+    background-color:
+            transparent;
+    margin: auto;
+    margin-top: 50px;
+    position: relative;
+    overflow:hidden;
+}
+#firstSlide{
+    width: 100%;
+    height: 100%;
+    background-color: green;
+    position: absolute;
+    left: 0;
+    right: 100%;
+    transition: all 1s ease-in-out;
+}
+#secondSlide{
+    width: 100%;
+    height: 100%;
+    background-color: orange;
+    position: absolute;
+    left: 100%;
+    transition: all 1s ease-in-out;
+}
+#slideButton{
+    display: none;
+    width:80px;
+    height: 500px;
+    background-color: rgba(0,0,0,0.60);
+    position: absolute;
+    right:0;
+    z-index: 20;
+    padding-top: 50px;
+    cursor: pointer;
+    transition: all 1s ease-in-out;
+}
+
+#btnTxt span {
+    text-align: center;
+    display: block;
+    color: ghostWhite;
+    font-size: 40px;
+    transition: all 1s ease-out;
+    opacity: 1;
+}
+
+.is-loading {
+    z-index: 1000;
+}
+/*---Footer---*/
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right:0;
+    height: 80px;
+    background-color: rgba(0,0,0,0.50);
+    color: rgba(255,255,255,0.40);
+    text-align: right;
+    padding-right: 20px
+}
+
+.footer .main {
+    position: fixed;
+    font-size: 15px;
+    bottom: 15px;
+    right: 10px;
+}
+.footer .secondary {
+    position: fixed;
+    font-size: 10px;
+    bottom: 5px;
+    right: 10px;
+}
+
+#weatherContainer , #courseContainer{
+    position: absolute;
+    width: 320px;
+    background-color: rgba(255,255,255,0.80);
+    border: 1px solid white;
+    overflow: hidden;
+    display: none;
+    top: 45px;
+}
+
+#weatherContainer {
+    left: 10px;
+    background-color: transparent;
+    border: none;
+}
+#temp , #wind , #icon , #cityName , #slideWeather , #courseStats , #humidity , #newCourse {
+    border: 1px solid white;
+    background-color: rgba(0,0,0,0.70);
+    font-family: "Milonga", cursive;
+    font-size: 15px;
+    height: auto;
+    width: auto;
+    color: white;
+    text-align: center;
+    text-shadow: 0 0 1px black;
+    padding: 5px;
+}
+#newCourse {
+    display: none;
+    float: left;
+    margin: 10px;
+    position: absolute;
+    background-color: transparent;
+    cursor: pointer;
+}
+#temp {
+    float: left;
+    padding: 5px;
+}
+
+#temp img {
+    font-size: 5px;
+    height: 10px;
+    float: right;
+}
+#temp:after {
+    content: "\00b0"
+}
+#humidity {
+    float: left;
+}
+
+#humidity:after {
+    content: "%"
+}
+
+#wind {
+    float: right;
+}
+
+#wind img {
+    height: 20px;
+    float:left;
+    padding-right: 4px;
+}
+#icon {
+    font-size: 20px;
+    background-color: transparent;
+    border: none;
+}
+
+#cityName {
+    font-size: 25px;
+}
+
+#slideWeather , #courseStats {
+    display: none;
+    cursor: pointer;
+    height: 35px;
+    width: 35px;
+    background-color: transparent;
+    border: none;
+    float: left;
+    margin-left: 10px;
+    margin-top: 10px;
+    position: relative;
+    left: 80px;
+}
+#cashButton {
+    height: 35px;
+    width: 35px;
+    position: relative;
+    left: 150px;
+    top: 0;
+}
+#courseContainer {
+    background-color: rgba(0,0,0,0.80);
+    font-size: 20px;
+    left: 100px;
+    z-index: 100;
+}
+@media only screen and (max-width: 500px) {
+    #scoreCardContainer {
+        justify-content: flex-start;
+    }
+}
