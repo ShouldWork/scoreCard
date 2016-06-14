@@ -23,9 +23,9 @@ $(document).ready(function() {
         error: function (request,errorType,errorMessage){
             $("#selectCourse").append(errorMessage);
         },
-        timeout: 3000,
+        timeout: 9000,
         beforeSend: function(){
-            $("#selectCourse").append("<img src='images/svg/golfClub.svg' class='is-loading' id='golfLoading'>");
+            $("#selectCourse").append("<img src='../src/images/svg/golfClub.svg' class='is-loading' id='golfLoading'>");
             $("#golfLoading").animate({"transform": "rotate(360deg)"},'fast');
         },
         complete: function(){
@@ -81,6 +81,14 @@ $(document).ready(function(){
 });
 
 
+$(document).ready(function() {
+    $("#scoreCard").on("click",".infoImg",function(){
+        $( "div[id*='holeInfo']" ).slideToggle();
+        // console.log($( "span[id*='holeInfo']" ).css({"height": "20px","width": "20px", "background-color": "red", "z-index": "2000"}));
+    });
+
+});
+
 var numHoles;
 function getCourseInfo(id) {
     xhttp.onreadystatechange = function() {
@@ -120,8 +128,10 @@ function buildPage(numHoles) {
 
     var playerCol = "<div id='playerCol' class='playerCol'></div>";
     scC.append(playerCol);
-    var holeRowTitle = "<div class='playerCell'>Hole</div>";
+    var holeRowTitle = "<div class='playerCell' id='holeTitle'>Hole</div>";
     $("#playerCol").append(holeRowTitle);
+    var holeInfoTitle = "<div class='holeInfo' id='holeInfo'>HCP.</div>";
+    $("#playerCol").append(holeInfoTitle);
     var parRowTitle = "<span class='playerCell'>Par</span>";
     $("#playerCol").append(parRowTitle);
     for (var j = 0; j < numHoles; j++ ) {
@@ -133,13 +143,24 @@ function buildPage(numHoles) {
             scC.append(outCol);
             $("#outCol").append(outCell).append(blankOutCell);
         }
-        var holeColTitleRow = "<span class='holeColTitleRow'>" + hole + "</span>",
+        var holeColTitleRow = "<span class='holeColTitleRow' id='hole" + hole + "'>" + hole + "</span>",
+            holeInfoRow = "<div class='holeInfo' id='holeInfo" + hole + "'></div>",
             holeColId = 'column' + j,
             holeColParRow = "<span class='parRowPro'>" + testCourse.course.holes[j].tee_boxes[0].par + "</span>",
             holeCol = "<div id='" + holeColId + "' class='holeCol'></div>";
         scC.append(holeCol);
-        $("#" + holeColId).append(holeColTitleRow).append(holeColParRow);
+        $("#" + holeColId).append(holeColTitleRow).append(holeInfoRow).append(holeColParRow);
+        $("#hole" + hole).append(holeInfoRow);
+        var teeInfo = testCourse.course.holes[j].tee_boxes;
+        for(var info in teeInfo){
+            console.log(teeInfo[info]);
+            if(!teeInfo[info].tee_type.includes("auto")){
+                $("#holeInfo" + hole).append("<div style='z-index: 100'>" + teeInfo[info].tee_type.substr(0,3) + ": " + teeInfo[info].hcp + "</div>");
+            }
+        }
+
     }
+    $("#holeTitle").append("<div class='infoImg'></div>");
     var totalCol = "<div id='totalColumn' class='holeCol'></div>",
         totalCell = "<div class='outCell'></div>",
         totalTitle = "<div class='outCell'>Total</div>",
@@ -154,12 +175,13 @@ function buildPage(numHoles) {
         },250
     );
 }
-var numPlayers = 0;
-var players = [];
-
+var numPlayers = 0,
+    players = [],
+    allTees;
 function addTeeBoxes(){
     //testCourse.course.holes[k].tee_boxes[players[numPlayers - 1].level].tee_type
-    for (var t in testCourse.course.holes[0].tee_boxes) {
+    allTees = testCourse.course.holes[0].tee_boxes;
+    for (var t in allTees) {
         var teeType = testCourse.course.holes[t].tee_boxes[t].tee_type;
         if (!teeType.includes("auto")) {
             var teeBox = toCapitalize(teeType);
@@ -249,7 +271,7 @@ function updateTotal(playerTotal,playerCol){
     for (var tt = 0; tt < numHoles; tt++) {
         var score = +$("#" + playerCol + tt).val();
         if (score !== ''){
-             totalScore += score;
+            totalScore += score;
         }
     }
     $("#" + playerTotal).html(totalScore);
@@ -337,7 +359,7 @@ function reCenterMap(lat,lng) {
 //weather API Call
 var xhttpWeather;
 var weatherObject = {};
-var weatherIcon = "images/svg/";
+var weatherIcon = "../src/images/svg/";
 
 function courseStats() {
     "use strict";
@@ -371,14 +393,14 @@ function getMyInfo() {
             var temperature = response.main.temp;
             $("#humidity").append(response.main.humidity);
             $("#temp").append(temperature.toFixed(0));
-            $("#temp img").first().attr("src","images/svg/farenheit.svg");
+            $("#temp img").first().attr("src","../src/images/svg/farenheit.svg");
             $("#wind").append(windSpeed).append("<img src''>");
             if (windSpeed > 0 && windSpeed <= 12 ) {
-                $("#wind img").attr('src','images/svg/wind-3.svg')
+                $("#wind img").attr('src','../src/images/svg/wind-3.svg')
             } else if (windSpeed > 12 && windSpeed <= 18) {
-                $("#wind img").attr('src','images/svg/wind-4.svg')
+                $("#wind img").attr('src','../src/images/svg/wind-4.svg')
             } else if (windSpeed > 18) {
-                $("#wind img").attr('src','images/svg/weather-1.svg')
+                $("#wind img").attr('src','../src/images/svg/weather-1.svg')
             }
             $("#icon img").first().attr("src", weatherIcon + response.weather[0].icon + ".svg");
             $("#weatherDesc").html(toCapitalize(response.weather[0].description));
@@ -401,7 +423,7 @@ function getMyInfo() {
 function clearWeather() {
     "use strict";
     $("#weatherContainer > div").not('#icon').html('');
-    $('#temp img').append('img src="images/svg/farenheit.svg"');
+    $('#temp img').append('img src="../src/images/svg/farenheit.svg"');
     $("#icon img").attr('src','');
 }
 
